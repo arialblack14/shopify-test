@@ -11,4 +11,11 @@ ShopifyApp.configure do |config|
   config.scripttags = [
     {event: 'onload', src: -> (domain) { asset_url('my_file.js', host: ENV['APP_DOMAIN']) } }
   ]
+
+  config.webhooks = [
+    {topic: 'app/uninstalled', address: "#{ENV['WEBHOOK_URL']}app_uninstalled", format: 'json'},
+    {topic: 'orders/delete', address: "#{ENV['WEBHOOK_URL']}orders_delete", format: 'json'},
+    {topic: 'orders/create', address: "#{ENV['WEBHOOK_URL']}orders_create", format: 'json'},
+    {topic: 'orders/updated', address: "#{ENV['WEBHOOK_URL']}orders_updated", format: 'json'}
+  ]
 end
